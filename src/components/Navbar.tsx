@@ -41,8 +41,8 @@ const Navbar: React.FC = () => {
       {menuOpen && (
         <div className="fixed inset-0 bg-black z-40 flex flex-col justify-center items-center">
           <div className="flex flex-col space-y-8 text-3xl font-light">
-            <Link to="/" onClick={toggleMenu} className="hover:text-gray-400 transition-colors">Info</Link>
-            <Link to="/work" onClick={toggleMenu} className="hover:text-gray-400 transition-colors">Work</Link>
+            <Link to="/" onClick={toggleMenu} className="hover:text-gray-400 transition-colors">Início</Link>
+            <Link to="/work" onClick={toggleMenu} className="hover:text-gray-400 transition-colors">Contato</Link>
             <Link to="/contact" onClick={toggleMenu} className="hover:text-gray-400 transition-colors">Contato</Link>
           </div>
         </div>
