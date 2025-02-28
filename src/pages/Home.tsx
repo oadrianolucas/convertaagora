@@ -99,7 +99,7 @@ const Home: React.FC = () => {
       {/* Work Section */}
       <section id="work" className="py-20 bg-zinc-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-16">Trabalhos [ Portfólio ]</h2>
+          <h2 className="text-4xl font-bold mb-16">Trabalhos / Portfólio </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {projects.slice(0, 4).map((project) => (
               <div key={project.id} className="group cursor-pointer">
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Clients Section */}
+      {/* Clients Section
       <section className="py-20 bg-black">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-4">
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Services Section */}
       <section id="services" className="py-20 bg-black">
