@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <Link to="/" className="text-2xl font-bold tracking-tighter"><img src='./img/icon-white.png' width={30}/></Link>
+            <Link to="/" className="text-2xl font-bold tracking-tighter"><img src='./img/icon-white.svg' width={30}/></Link>
           </div>
           <div className="flex flex-col md:flex-row md:space-x-8 text-center md:text-left">
             <Link to="/" className="mb-4 md:mb-0 hover:text-gray-400 transition-colors">Início</Link>

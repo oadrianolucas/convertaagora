@@ -81,11 +81,7 @@ const Home: React.FC = () => {
             A essência da <br /> sua marca.
           </h1>
           <p className="text-xl md:text-2xl max-w-2xl mb-10 text-gray-300">
-            Fundada pelos designers Adriano Lucas e Yuri Victor, a Converta
-            Agora é um estúdio de design especializado na concepção de branding
-            e na criação de marcas, com foco na conversão e na elaboração de
-            narrativas que potencializam o posicionamento estratégico de
-            empresas de variados setores e dimensões.
+            A Converta Agora é um estúdio de design especializado na concepção de branding e na criação de marcas, com foco na conversão e na elaboração de narrativas que potencializam o posicionamento estratégico de empresas de variados setores e dimensões.
           </p>
           <Link
             to="/work"

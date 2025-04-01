@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
     <>
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-black shadow-md' : 'py-6 bg-transparent'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold tracking-tighter"><img src='./img/logo.png' width={180}/></Link>
+          <Link to="/" className="text-2xl font-bold tracking-tighter"><img src='./img/logo.svg' width={180}/></Link>
           <div className="hidden md:flex space-x-8">
             <Link to="/" className={`hover:text-gray-400 transition-colors ${location.pathname === '/' ? 'text-gray-400' : ''}`}>Início</Link>
             <Link to="/work" className={`hover:text-gray-400 transition-colors ${location.pathname === '/work' ? 'text-gray-400' : ''}`}>Trabalhos</Link>

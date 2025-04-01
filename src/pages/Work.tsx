@@ -59,7 +59,7 @@ const Work: React.FC = () => {
   
   return (
     <div className="bg-black text-white pt-24 pb-20">
-      <div className="container mx-auto px-6">
+      <div className="mt-10 container mx-auto px-6">
         <div className="mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Todos trabalhos.</h1>
           <p className="text-xl text-gray-300 max-w-3xl">
