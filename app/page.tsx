@@ -433,23 +433,23 @@ export default function HomePage() {
                     {[
                       {
                         id: 1,
-                        img: "prancheta 1.png",
+                        img: "prancheta1.png",
                       },
                       {
                         id: 2,
-                        img: "prancheta 2.png",
+                        img: "prancheta2.png",
                       },
                       {
                         id: 3,
-                        img: "prancheta 3.png",
+                        img: "prancheta3.png",
                       },
                       {
                         id: 4,
-                        img: "prancheta 4.png",
+                        img: "prancheta4.png",
                       },
                       {
                         id: 5,
-                        img: "prancheta 6.png",
+                        img: "prancheta6.png",
                       },
                     ].map((client, index) => (
                       <img className="w-32" src={client.img} key={client.id} />
