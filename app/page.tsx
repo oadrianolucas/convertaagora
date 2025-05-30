@@ -592,7 +592,7 @@ export default function HomePage() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    Nossas Entregas
+                    Nossos Serviços
                   </motion.h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" role="list">
@@ -651,6 +651,28 @@ export default function HomePage() {
                       </motion.div>
                     ))}
                   </div>
+
+                  <motion.div
+                    className="flex flex-col mt-16 sm:flex-row gap-4 justify-center items-center px-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: hasNavigated ? 0.6 : 0.9 }}
+                  >
+                    <Link href="/contato" aria-label="Iniciar projeto com a Converta Agora">
+                      <motion.button
+                        className="group flex items-center gap-2 border border-white px-6 md:px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto justify-center"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <span className="font-light tracking-wide">Iniciar Projeto</span>
+                        <ArrowRight
+                          size={16}
+                          className="group-hover:translate-x-1 transition-transform"
+                          aria-hidden="true"
+                        />
+                      </motion.button>
+                    </Link>
+                  </motion.div>
                 </div>
               </section>
 
