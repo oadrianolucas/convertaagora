@@ -298,14 +298,16 @@ export default function HomePage() {
                         whileTap={{ scale: 0.98 }}
                       >
                         <span className="font-light tracking-wide">Iniciar Projeto</span>
-                        <ArrowRight
-                          size={16}
-                          className="group-hover:translate-x-1 transition-transform"
-                          aria-hidden="true"
-                        />
                       </motion.button>
+                      <div className="flex justify-center py-3 md:py-4" aria-hidden="true">
+                        <ArrowDown
+                          size={20}
+                          className="text-white/30 md:w-6 md:h-6 group-hover:text-white/50 transition-colors"
+                        />
+                      </div>
                     </Link>
                   </motion.div>
+                  
                 </div>
               </section>
 
