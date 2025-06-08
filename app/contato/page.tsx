@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Head from "next/head"
-import { motion } from "framer-motion"
-import { Mail, MapPin, Instagram, ExternalLink } from "lucide-react"
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
+import { useState } from "react";
+import Head from "next/head";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Instagram, ExternalLink } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export default function ContatoPage() {
   const [formData, setFormData] = useState({
@@ -14,54 +14,59 @@ export default function ContatoPage() {
     assunto: "",
     mensagem: "",
     whatsapp: "",
-  })
+  });
 
-  const [resultMessage, setResultMessage] = useState("")
+  const [resultMessage, setResultMessage] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  const { name, value } = e.target
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
-  const formatPhone = (v: string) =>
+    const formatPhone = (v: string) =>
       v
         .replace(/\D/g, "")
         .replace(/^(\d{2})(\d)/, "($1) $2")
         .replace(/(\d{5})(\d)/, "$1-$2")
-        .replace(/(-\d{4})\d+?$/, "$1")
+        .replace(/(-\d{4})\d+?$/, "$1");
 
     setFormData({
       ...formData,
       [name]: name === "whatsapp" ? formatPhone(value) : value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setResultMessage("Enviando...")
+    e.preventDefault();
+    setResultMessage("Enviando...");
 
-    const data = new FormData(e.currentTarget)
-    data.append("access_key", "e5b3219d-6808-478b-a98f-eaddd22b55cf")
+    const data = new FormData(e.currentTarget);
+    data.append("access_key", "e5b3219d-6808-478b-a98f-eaddd22b55cf");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: data,
-    })
+    });
 
-    const result = await response.json()
+    const result = await response.json();
 
     if (result.success) {
-      setResultMessage("Mensagem enviada com sucesso!")
-      setFormData({ nome: "", email: "", assunto: "", mensagem: "" })
+      setResultMessage("Mensagem enviada com sucesso!");
+      setFormData({ nome: "", email: "", assunto: "", mensagem: "" });
     } else {
-      console.error(result)
-      setResultMessage("Ocorreu um erro. Tente novamente.")
+      console.error(result);
+      setResultMessage("Ocorreu um erro. Tente novamente.");
     }
-  }
+  };
 
   return (
     <>
       <Head>
         <title>Contato | Converta Agora - Agência de Tecnologia</title>
-        <meta name="description" content="Entre em contato com a Converta Agora." />
+        <meta
+          name="description"
+          content="Entre em contato com a Converta Agora."
+        />
         <link rel="canonical" href="https://convertaagora.com/contato" />
       </Head>
 
@@ -79,15 +84,21 @@ export default function ContatoPage() {
               >
                 <h1 className="text-5xl md:text-6xl font-light mb-8">
                   Vamos <br />
-                  <span className="italic font-extralight text-white/80">Conversar</span>
+                  <span className="italic font-extralight text-white/80">
+                    Conversar
+                  </span>
                 </h1>
                 <p className="text-lg text-white/60 font-light mb-12">
-                  Projetos e colaborações começam com uma conversa. Conte-nos sobre sua visão.
+                  Projetos e colaborações começam com uma conversa. Conte-nos
+                  sobre sua visão.
                 </p>
 
                 <div className="space-y-8">
                   <div className="flex items-center gap-4 group">
-                    <Mail size={20} className="text-white/40 group-hover:text-white transition-colors" />
+                    <Mail
+                      size={20}
+                      className="text-white/40 group-hover:text-white transition-colors"
+                    />
                     <a
                       href="mailto:contato@convertaagora.com"
                       className="font-light text-white/80 hover:text-white transition-colors"
@@ -96,22 +107,35 @@ export default function ContatoPage() {
                     </a>
                   </div>
                   <div className="flex items-center gap-4 group">
-                    <MapPin size={20} className="text-white/40 group-hover:text-white transition-colors" />
-                    <span className="font-light text-white/80">São Paulo, Brasil</span>
+                    <MapPin
+                      size={20}
+                      className="text-white/40 group-hover:text-white transition-colors"
+                    />
+                    <span className="font-light text-white/80">
+                      São Paulo, Brasil
+                    </span>
                   </div>
                 </div>
 
                 <section className="mt-12 pt-8 border-t border-white/10">
-                  <h2 className="text-lg font-light mb-6 text-white/80">Social</h2>
+                  <h2 className="text-lg font-light mb-6 text-white/80">
+                    Social
+                  </h2>
                   <a
                     href="https://instagram.com/convertaagora"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 group text-white/60 hover:text-white transition-colors"
                   >
-                    <Instagram size={18} className="group-hover:text-white transition-colors" />
+                    <Instagram
+                      size={18}
+                      className="group-hover:text-white transition-colors"
+                    />
                     <span className="font-light">@convertaagora</span>
-                    <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ExternalLink
+                      size={14}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    />
                   </a>
                 </section>
               </motion.section>
@@ -123,12 +147,23 @@ export default function ContatoPage() {
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <input type="hidden" name="from_name" value="Converta Agora Site" />
-                  <input type="hidden" name="subject" value={formData.assunto || "Nova mensagem do site"} />
+                  <input
+                    type="hidden"
+                    name="from_name"
+                    value="Converta Agora Site"
+                  />
+                  <input
+                    type="hidden"
+                    name="subject"
+                    value={formData.assunto || "Nova mensagem do site"}
+                  />
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="nome" className="block text-sm font-light text-white/60 mb-2">
+                      <label
+                        htmlFor="nome"
+                        className="block text-sm font-light text-white/60 mb-2"
+                      >
                         Nome *
                       </label>
                       <input
@@ -143,7 +178,10 @@ export default function ContatoPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-light text-white/60 mb-2">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-light text-white/60 mb-2"
+                      >
                         Email *
                       </label>
                       <input
@@ -158,7 +196,10 @@ export default function ContatoPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="whatsapp" className="block text-sm font-light text-white/60 mb-2">
+                      <label
+                        htmlFor="whatsapp"
+                        className="block text-sm font-light text-white/60 mb-2"
+                      >
                         WhatsApp *
                       </label>
                       <input
@@ -173,7 +214,10 @@ export default function ContatoPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="assunto" className="block text-sm font-light text-white/60 mb-2">
+                      <label
+                        htmlFor="assunto"
+                        className="block text-sm font-light text-white/60 mb-2"
+                      >
                         Assunto *
                       </label>
                       <input
@@ -188,9 +232,15 @@ export default function ContatoPage() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="mensagem" className="block text-sm font-light text-white/60 mb-2">
+                    <label
+                      htmlFor="mensagem"
+                      className="block text-sm font-light text-white/60"
+                    >
                       Mensagem *
                     </label>
+                    <span className="text-sm font-extralight text-white/40">
+                      Me conte sobre sua próxima inovação!
+                    </span>
                     <textarea
                       id="mensagem"
                       name="mensagem"
@@ -212,7 +262,9 @@ export default function ContatoPage() {
                   </motion.button>
 
                   {resultMessage && (
-                    <p className="text-sm text-white/60 pt-2 transition-opacity">{resultMessage}</p>
+                    <p className="text-sm text-white/60 pt-2 transition-opacity">
+                      {resultMessage}
+                    </p>
                   )}
                 </form>
               </motion.section>
@@ -223,5 +275,5 @@ export default function ContatoPage() {
         <Footer />
       </div>
     </>
-  )
+  );
 }

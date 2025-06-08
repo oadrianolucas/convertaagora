@@ -1,16 +1,16 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
-  title: "Converta Agora | Agência de Tecnologia e Inovação Digital",
+  title: "Somos o elo entre tecnológica e resultados reais!",
   description:
     "Transformamos ideias em soluções digitais de alta performance. Especialistas em desenvolvimento de plataformas SaaS, e-commerces premium, IA, IoT e Web3. Fundada em 2022, unimos tecnologia de ponta com visão de negócios para resultados reais.",
   keywords: [
@@ -84,13 +84,13 @@ export const metadata: Metadata = {
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
   },
-    generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="pt-BR" className={inter.className}>
@@ -125,7 +125,10 @@ export default function RootLayout({
                 email: "contato@convertaagora.com",
                 contactType: "customer service",
               },
-              sameAs: ["https://instagram.com/convertaagora", "https://behance.net/convertaagora"],
+              sameAs: [
+                "https://instagram.com/convertaagora",
+                "https://behance.net/convertaagora",
+              ],
               services: [
                 "Desenvolvimento de Plataformas SaaS",
                 "E-commerces Premium",
@@ -140,7 +143,8 @@ export default function RootLayout({
                   "@type": "Award",
                   name: "Vencedores do Desafio Brasilseg",
                   dateReceived: "2023",
-                  description: "Primeiro lugar no desafio de inovação do setor de seguros em parceria com bbchains",
+                  description:
+                    "Primeiro lugar no desafio de inovação do setor de seguros em parceria com bbchains",
                 },
               ],
             }),
@@ -149,5 +153,5 @@ export default function RootLayout({
       </head>
       <body>{children}</body>
     </html>
-  )
+  );
 }

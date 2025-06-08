@@ -1,84 +1,95 @@
-"use client"
+"use client";
 
-import dynamic from "next/dynamic"
-import { Suspense, useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Code, Smartphone, Brain, Monitor, Palette, ArrowDown, MessageSquare } from "lucide-react"
-import Link from "next/link"
-import Head from "next/head"
-import Navigation from "@/components/Navigation"
-import Footer from "@/components/Footer"
+import dynamic from "next/dynamic";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  Code,
+  Smartphone,
+  Brain,
+  Monitor,
+  Palette,
+  ArrowDown,
+  MessageSquare,
+} from "lucide-react";
+import Link from "next/link";
+import Head from "next/head";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
-const Globe = dynamic(() => import("@/components/Globe"), { ssr: false })
+const Globe = dynamic(() => import("@/components/Globe"), { ssr: false });
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [showMainContent, setShowMainContent] = useState(false)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [showFixedNav, setShowFixedNav] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [hasNavigated, setHasNavigated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+  const [showMainContent, setShowMainContent] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showFixedNav, setShowFixedNav] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasNavigated, setHasNavigated] = useState(false);
+  const nossaEssenciaRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+      setIsMobile(window.innerWidth < 768);
+    };
 
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
 
     // Verificar se o usuário já navegou pelo menu
-    const hasNavigatedBefore = sessionStorage.getItem("hasNavigated") === "true"
+    const hasNavigatedBefore =
+      sessionStorage.getItem("hasNavigated") === "true";
 
     if (hasNavigatedBefore) {
-      setHasNavigated(true)
-      setShowMainContent(true)
-      setShowFixedNav(true)
+      setHasNavigated(true);
+      setShowMainContent(true);
+      setShowFixedNav(true);
     }
 
     const loadingTimer = setTimeout(
       () => {
-        setIsLoading(false)
+        setIsLoading(false);
       },
-      hasNavigatedBefore ? 1000 : 2500,
-    )
+      hasNavigatedBefore ? 1000 : 2500
+    );
 
     return () => {
-      clearTimeout(loadingTimer)
-      window.removeEventListener("resize", checkMobile)
-    }
-  }, [])
+      clearTimeout(loadingTimer);
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    })
+    });
 
     // Marcar que o usuário navegou pelo menu
-    setHasNavigated(true)
-    sessionStorage.setItem("hasNavigated", "true")
+    setHasNavigated(true);
+    sessionStorage.setItem("hasNavigated", "true");
 
     // Mostrar conteúdo principal imediatamente
-    setShowMainContent(true)
-    setShowFixedNav(true)
-  }
+    setShowMainContent(true);
+    setShowFixedNav(true);
+  };
 
   const handleTransition = () => {
-    setIsTransitioning(true)
+    setIsTransitioning(true);
 
     // Marcar que o usuário viu a transição
-    sessionStorage.setItem("hasNavigated", "true")
+    sessionStorage.setItem("hasNavigated", "true");
 
     setTimeout(() => {
-      setShowMainContent(true)
-      setShowFixedNav(true)
-    }, 1000)
+      setShowMainContent(true);
+      setShowFixedNav(true);
+    }, 1000);
 
     setTimeout(() => {
-      setIsTransitioning(false)
-    }, 1500)
-  }
+      setIsTransitioning(false);
+    }, 1500);
+  };
 
   if (isLoading) {
     return (
@@ -93,7 +104,7 @@ export default function HomePage() {
           }}
         />
       </div>
-    )
+    );
   }
 
   return (
@@ -106,7 +117,8 @@ export default function HomePage() {
               "@context": "https://schema.org",
               "@type": "WebPage",
               name: "Converta Agora - Home",
-              description: "Página inicial da Converta Agora, agência de tecnologia e inovação digital",
+              description:
+                "Página inicial da Converta Agora, agência de tecnologia e inovação digital",
               url: "https://convertaagora.com",
               mainEntity: {
                 "@type": "Organization",
@@ -119,7 +131,11 @@ export default function HomePage() {
 
       <div className="bg-black text-white overflow-hidden">
         {/* Fixed Navigation */}
-        <Navigation currentPage="home" onHomeClick={scrollToTop} showFixedNav={showFixedNav} />
+        <Navigation
+          currentPage="home"
+          onHomeClick={scrollToTop}
+          showFixedNav={showFixedNav}
+        />
 
         {/* Hero Section with Globe */}
         <AnimatePresence>
@@ -187,7 +203,9 @@ export default function HomePage() {
                       />
 
                       <span className="relative z-10 flex items-center gap-3 font-light tracking-wide text-white">
-                        <span className="text-sm md:text-base">Descobrir Mais</span>
+                        <span className="text-sm md:text-base">
+                          Descobrir Mais
+                        </span>
                         <ArrowRight
                           size={isMobile ? 16 : 20}
                           className="group-hover:translate-x-1 transition-transform duration-300"
@@ -208,7 +226,11 @@ export default function HomePage() {
                     <motion.div
                       className="flex flex-col items-center gap-2"
                       animate={{ y: [0, 8, 0] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      transition={{
+                        duration: 2,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut",
+                      }}
                     >
                       {[0, 1, 2].map((i) => (
                         <motion.div
@@ -255,64 +277,89 @@ export default function HomePage() {
               id="main"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: hasNavigated ? 0.5 : 1, delay: hasNavigated ? 0 : 0.5 }}
+              transition={{
+                duration: hasNavigated ? 0.5 : 1,
+                delay: hasNavigated ? 0 : 0.5,
+              }}
             >
               {/* Technology & Innovation Section */}
               <section
-                className={`min-h-screen flex items-center justify-center px-4 md:px-6 py-16 md:py-20 ${showFixedNav ? "pt-24 md:pt-28" : ""}`}
+                className={`min-h-screen flex items-center justify-center px-4 md:px-6 py-16 md:py-20 ${
+                  showFixedNav ? "pt-24 md:pt-28" : ""
+                }`}
                 aria-labelledby="technology-heading"
               >
                 <div className="text-center max-w-5xl">
                   <motion.h1
                     id="technology-heading"
-                    className="text-4xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 md:mb-8"
+                    className="text-6xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 md:mb-8"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: hasNavigated ? 0.2 : 0.3 }}
+                    transition={{
+                      duration: 1,
+                      delay: hasNavigated ? 0.2 : 0.3,
+                    }}
                   >
                     Tecnologia
                     <br />
-                    <span className="italic font-extralight text-white/80">& Inovação</span>
+                    <span className="italic font-extralight text-white/80">
+                      & Inovação
+                    </span>
                   </motion.h1>
 
                   <motion.p
                     className="text-base md:text-lg lg:text-xl font-light text-white/60 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed px-4"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: hasNavigated ? 0.4 : 0.6 }}
+                    transition={{
+                      duration: 1,
+                      delay: hasNavigated ? 0.4 : 0.6,
+                    }}
                   >
-                    Transformamos ideias em soluções digitais de alta performance, excelência em design e foco absoluto
-                    em performance estratégica
+                    Transformamos ideias em soluções digitais de alta
+                    performance, excelência em design e foco absoluto em
+                    performance estratégica
                   </motion.p>
 
                   <motion.div
-                    className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4"
+                    className="flex flex-col gap-4 justify-center items-center px-4"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: hasNavigated ? 0.6 : 0.9 }}
+                    transition={{
+                      duration: 1,
+                      delay: hasNavigated ? 0.6 : 0.9,
+                    }}
                   >
-                    <Link href="/contato" aria-label="Iniciar projeto com a Converta Agora">
-                      <motion.button
-                        className="group flex items-center gap-2 border border-white px-6 md:px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto justify-center"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <span className="font-light tracking-wide">Iniciar Projeto</span>
-                      </motion.button>
-                      <div className="flex justify-center py-3 md:py-4" aria-hidden="true">
-                        <ArrowDown
-                          size={20}
-                          className="text-white/30 md:w-6 md:h-6 group-hover:text-white/50 transition-colors"
-                        />
-                      </div>
-                    </Link>
+                    <motion.button
+                      onClick={() =>
+                        nossaEssenciaRef.current?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        })
+                      }
+                      className="group flex items-center gap-2 border border-white px-6 md:px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 sm:w-auto justify-center"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      aria-label="Nossa Essência"
+                    >
+                      <span className="font-light tracking-wide">
+                        Nossa Essência
+                      </span>
+                    </motion.button>
+                    <ArrowDown
+                      size={20}
+                      className="text-white/30 md:w-6 md:h-6 group-hover:text-white/50 transition-colors"
+                    />
                   </motion.div>
-                  
                 </div>
               </section>
 
               {/* About Section */}
-              <section className="py-16 md:py-20 px-4 md:px-6 border-t border-white/10" aria-labelledby="about-heading">
+              <section
+                ref={nossaEssenciaRef}
+                className="py-16 md:py-20 px-4 md:px-6 border-t border-white/10"
+                aria-labelledby="about-heading"
+              >
                 <div className="container mx-auto max-w-6xl">
                   {/* Nossa Essência */}
                   <motion.div
@@ -322,24 +369,61 @@ export default function HomePage() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    <h2 id="about-heading" className="text-3xl md:text-4xl lg:text-5xl font-light mb-6 md:mb-8">
+                    <h2
+                      id="about-heading"
+                      className="text-3xl md:text-4xl lg:text-5xl font-light mb-6 md:mb-8"
+                    >
                       Nossa Essência
                     </h2>
                     <div className="max-w-4xl mx-auto space-y-4 md:space-y-6 text-white/70 font-light leading-relaxed text-sm md:text-base">
                       <p>
-                        <strong className="text-white font-normal">Converta Agora</strong> é uma agência de tecnologia e
-                        inovação digital, fundada em 2022, com o propósito de entregar soluções de altíssimo padrão,
-                        unindo performance estratégica, design de excelência e tecnologia de ponta.
+                        A{" "}
+                        <strong className="text-white font-normal">
+                          Converta Agora
+                        </strong>{" "}
+                        é uma software house especializada em criar soluções
+                        tecnológicas sob medida para marcas e agências. Fundada
+                        em 2022, unimos performance estratégica, excelência em
+                        design e inovação digital para entregar produtos de alto
+                        padrão e impacto real.
                       </p>
                       <p>
-                        Somos especialistas em conceber e desenvolver produtos digitais sob medida para marcas que
-                        exigem sofisticação, inteligência técnica e diferenciação competitiva real.
+                        Somos especialistas em conceber e desenvolver produtos
+                        digitais sob medida para marcas que exigem sofisticação,
+                        inteligência técnica e diferenciação competitiva real.
                       </p>
                       <p>
-                        Atuamos na interseção entre tecnologia de ponta e visão de negócios, criando experiências que
-                        elevam o posicionamento de mercado e impulsionam resultados concretos.
+                        Atuamos na interseção entre tecnologia de ponta e visão
+                        de negócios, criando experiências que elevam o
+                        posicionamento de mercado e impulsionam resultados
+                        concretos.
                       </p>
                     </div>
+                  </motion.div>
+
+                  <motion.div
+                    className="flex flex-col gap-4 justify-center items-center pb-12"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: hasNavigated ? 0.6 : 0.9,
+                    }}
+                  >
+                    <Link
+                      href="/contato"
+                      aria-label="Iniciar projeto com a Converta Agora"
+                    >
+                      <motion.button
+                        className="group flex items-center gap-2 border border-white px-6 md:px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto justify-center"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <span className="font-light tracking-wide">
+                          Iniciar Projeto
+                        </span>
+                      </motion.button>
+                    </Link>
                   </motion.div>
 
                   {/* Modelo de Criação de Inovação */}
@@ -353,27 +437,54 @@ export default function HomePage() {
                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-light mb-10 md:mb-14 text-white">
                       Modelo de Criação
                       <br />
-                      <span className="italic font-extralight text-white/80">de Inovação</span>
+                      <span className="italic font-extralight text-white/80">
+                        de Inovação
+                      </span>
                     </h3>
 
                     <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
                       {[
-                        { step: "01", title: "Brainstorm", desc: "Ideação e exploração criativa" },
-                        { step: "02", title: "Definição das Regras de Negócio", desc: "Estruturação estratégica" },
-                        { step: "03", title: "Melhor Custo-Benefício", desc: "Otimização de recursos" },
+                        {
+                          step: "01",
+                          title: "Brainstorm",
+                          desc: "Ideação e exploração criativa",
+                        },
+                        {
+                          step: "02",
+                          title: "Definição das Regras de Negócio",
+                          desc: "Estruturação estratégica",
+                        },
+                        {
+                          step: "03",
+                          title: "Melhor Custo-Benefício",
+                          desc: "Otimização de recursos",
+                        },
                         {
                           step: "04",
-                          title: "Prototipagem e Experiência do Usuário (UX/UI)",
+                          title:
+                            "Prototipagem e Experiência do Usuário (UX/UI)",
                           desc: "Design centrado no usuário",
                         },
-                        { step: "05", title: "Desenvolvimento Tecnológico", desc: "Implementação técnica" },
-                        { step: "06", title: "Validação, Testes e Ajustes", desc: "Refinamento e qualidade" },
+                        {
+                          step: "05",
+                          title: "Desenvolvimento Tecnológico",
+                          desc: "Implementação técnica",
+                        },
+                        {
+                          step: "06",
+                          title: "Validação, Testes e Ajustes",
+                          desc: "Refinamento e qualidade",
+                        },
                         {
                           step: "07",
                           title: "Entrega, Onboarding e Monitoramento",
                           desc: "Lançamento e acompanhamento",
                         },
-                        { step: "08", title: "Evolução Contínua", desc: "Melhoria permanente" },
+                        {
+                          step: "08",
+                          title: "Evolução Contínua",
+                          desc: "Melhoria permanente",
+                        },
                       ].map((item, index) => (
                         <motion.div
                           key={item.step}
@@ -397,7 +508,10 @@ export default function HomePage() {
                             </div>
                           </div>
                           {index < 7 && (
-                            <div className="flex justify-center py-3 md:py-4" aria-hidden="true">
+                            <div
+                              className="flex justify-center py-3 md:py-4"
+                              aria-hidden="true"
+                            >
                               <ArrowDown
                                 size={20}
                                 className="text-white/30 md:w-6 md:h-6 group-hover:text-white/50 transition-colors"
@@ -410,6 +524,28 @@ export default function HomePage() {
                   </motion.div>
                 </div>
               </section>
+
+              <motion.div
+                className="flex flex-col gap-4 justify-center items-center pb-24"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: hasNavigated ? 0.6 : 0.9,
+                }}
+              >
+                <Link href="/contato" aria-label="Comece sua jornada digital">
+                  <motion.button
+                    className="group flex items-center gap-2 border border-white px-6 md:px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto justify-center"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="font-light tracking-wide">
+                      Comece sua jornada digital
+                    </span>
+                  </motion.button>
+                </Link>
+              </motion.div>
 
               {/* Clients Section */}
               <section
@@ -424,14 +560,22 @@ export default function HomePage() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    <h2 id="clients-heading" className="text-3xl md:text-4xl lg:text-5xl font-light mb-4">
+                    <h2
+                      id="clients-heading"
+                      className="text-3xl md:text-4xl lg:text-5xl font-light mb-4"
+                    >
                       Clientes
                       <br />
-                      <span className="italic font-extralight text-white/80">Selecionados</span>
+                      <span className="italic font-extralight text-white/80">
+                        Selecionados
+                      </span>
                     </h2>
                   </motion.div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 md:gap-8" role="list">
+                  <div
+                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 md:gap-8"
+                    role="list"
+                  >
                     {[
                       {
                         id: 1,
@@ -473,10 +617,15 @@ export default function HomePage() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    <h2 id="awards-heading" className="text-3xl md:text-4xl lg:text-5xl font-light mb-8">
+                    <h2
+                      id="awards-heading"
+                      className="text-3xl md:text-4xl lg:text-5xl font-light mb-8"
+                    >
                       Prêmios
                       <br />
-                      <span className="italic font-extralight text-white/80">& Reconhecimentos</span>
+                      <span className="italic font-extralight text-white/80">
+                        & Reconhecimentos
+                      </span>
                     </h2>
                   </motion.div>
 
@@ -501,7 +650,13 @@ export default function HomePage() {
                             aria-hidden="true"
                           >
                             <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center group-hover:bg-white/90 transition-colors">
-                              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-black">
+                              <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                className="text-black"
+                              >
                                 <path
                                   d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"
                                   fill="currentColor"
@@ -532,8 +687,12 @@ export default function HomePage() {
                               </h3>
 
                               <p className="text-white/60 font-light leading-relaxed mb-4 text-sm md:text-base">
-                                Em parceria com a <strong className="text-white/80 font-normal">bbchains</strong>,
-                                conquistamos o primeiro lugar no desafio de inovação do setor de seguros, desenvolvendo
+                                Em parceria com a{" "}
+                                <strong className="text-white/80 font-normal">
+                                  bbchains
+                                </strong>
+                                , conquistamos o primeiro lugar no desafio de
+                                inovação do setor de seguros, desenvolvendo
                                 soluções disruptivas para o mercado brasileiro.
                               </p>
 
@@ -584,7 +743,10 @@ export default function HomePage() {
               </section>
 
               {/* Services Section */}
-              <section className="py-16 md:py-20 px-4 md:px-6 bg-white/5" aria-labelledby="services-heading">
+              <section
+                className="py-16 md:py-20 px-4 md:px-6 bg-white/5"
+                aria-labelledby="services-heading"
+              >
                 <div className="container mx-auto max-w-6xl">
                   <motion.h2
                     id="services-heading"
@@ -597,7 +759,10 @@ export default function HomePage() {
                     Nossos Serviços
                   </motion.h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" role="list">
+                  <div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    role="list"
+                  >
                     {[
                       {
                         icon: Code,
@@ -648,8 +813,12 @@ export default function HomePage() {
                             strokeWidth={1}
                           />
                         </div>
-                        <h3 className="text-base md:text-lg font-light mb-2 md:mb-3 text-white">{service.title}</h3>
-                        <p className="text-white/60 font-light leading-relaxed text-sm">{service.desc}</p>
+                        <h3 className="text-base md:text-lg font-light mb-2 md:mb-3 text-white">
+                          {service.title}
+                        </h3>
+                        <p className="text-white/60 font-light leading-relaxed text-sm">
+                          {service.desc}
+                        </p>
                       </motion.div>
                     ))}
                   </div>
@@ -658,20 +827,23 @@ export default function HomePage() {
                     className="flex flex-col mt-16 sm:flex-row gap-4 justify-center items-center px-4"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: hasNavigated ? 0.6 : 0.9 }}
+                    transition={{
+                      duration: 1,
+                      delay: hasNavigated ? 0.6 : 0.9,
+                    }}
                   >
-                    <Link href="/contato" aria-label="Iniciar projeto com a Converta Agora">
+                    <Link
+                      href="/contato"
+                      aria-label="Iniciar projeto com a Converta Agora"
+                    >
                       <motion.button
                         className="group flex items-center gap-2 border border-white px-6 md:px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto justify-center"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <span className="font-light tracking-wide">Iniciar Projeto</span>
-                        <ArrowRight
-                          size={16}
-                          className="group-hover:translate-x-1 transition-transform"
-                          aria-hidden="true"
-                        />
+                        <span className="font-light tracking-wide">
+                          Iniciar Projeto
+                        </span>
                       </motion.button>
                     </Link>
                   </motion.div>
@@ -679,7 +851,10 @@ export default function HomePage() {
               </section>
 
               {/* Value Proposition Section */}
-              <section className="py-16 md:py-20 px-4 md:px-6 border-t border-white/10" aria-labelledby="value-heading">
+              <section
+                className="py-16 md:py-20 px-4 md:px-6 border-t border-white/10"
+                aria-labelledby="value-heading"
+              >
                 <div className="container mx-auto max-w-4xl text-center">
                   <motion.h2
                     id="value-heading"
@@ -689,10 +864,16 @@ export default function HomePage() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                   >
-                    Mais que uma <span className="italic font-extralight text-white/80">software house</span> —{" "}
-                    <br className="hidden md:block" />
+                    Mais que uma{" "}
+                    <span className="italic font-extralight text-white/80">
+                      software house
+                    </span>{" "}
+                    — <br className="hidden md:block" />
                     somos o elo entre inovação tecnológica e{" "}
-                    <span className="italic font-extralight text-white/80">resultados reais</span> no seu faturamento.
+                    <span className="italic font-extralight text-white/80">
+                      resultados reais
+                    </span>{" "}
+                    no seu faturamento.
                   </motion.h2>
                 </div>
               </section>
@@ -704,5 +885,5 @@ export default function HomePage() {
         </AnimatePresence>
       </div>
     </>
-  )
+  );
 }
